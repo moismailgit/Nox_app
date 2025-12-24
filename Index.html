@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nox App</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        body { font-family: sans-serif; background-color: #0f0f0f; color: white; margin: 0; padding: 0; }
+        .tabs { display: flex; background: #1a1a1a; position: sticky; top: 0; }
+        .tab { flex: 1; padding: 15px; text-align: center; cursor: pointer; border-bottom: 2px solid transparent; }
+        .tab.active { border-bottom: 2px solid #0088cc; color: #0088cc; }
+        .content { padding: 20px; display: none; }
+        .content.active { display: block; }
+        .chat-item { background: #222; padding: 15px; border-radius: 10px; margin-bottom: 10px; display: flex; justify-content: space-between; }
+        .btn-action { background: #0088cc; color: white; border: none; padding: 5px 10px; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <div class="tabs">
+        <div class="tab active" onclick="openTab('chats')">الشاتات الخاصة</div>
+        <div class="tab" onclick="openTab('groups')">الجروبات السرية</div>
+    </div>
+
+    <div id="chats" class="content active">
+        <h3>المحادثات المجهولة</h3>
+        <div id="chat-list">
+            <div class="chat-item">
+                <span>مجهول السحاب</span>
+                <button class="btn-action">فتح النافذة</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="groups" class="content">
+        <h3>المجتمعات التي انضممت إليها</h3>
+        <div id="group-list">
+            <div class="chat-item">
+                <span>جروب Nox العام</span>
+                <button class="btn-action">دخول</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let tg = window.Telegram.WebApp;
+        tg.expand(); // لفتح النافذة كاملة
+
+        function openTab(tabId) {
+            document.querySelectorAll('.content').forEach(c => c.classList.remove('active'));
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+    </script>
+</body>
+</html>
